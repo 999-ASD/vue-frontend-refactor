@@ -1,0 +1,117 @@
+/*页面框架*/
+.header{
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+.navbar{
+	background: #c0392b; /* 红色背景 */
+}
+.navbar-fixed-top{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1030;
+}
+.container-fluid{
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.navbar .logo{
+	height: 44px;
+	line-height: 44px;
+	margin-right:10px;
+	float: left;
+}
+.navbar-logo{
+	color:#FFF;
+	font-size: 16px;
+	font-weight: bold;
+	text-shadow: 1px 1px 2px #900;
+}
+.navbar-slogan{
+	color:#FFD1D1;
+	font-size: 12px;
+	cursor: default;
+}
+.nav {
+	z-index: 1;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+.nav > ul {
+	font-size: 0;
+	line-height: 0;
+}
+#navbar-userbar{
+	right: 40px;
+	position: absolute;
+	top:0;
+	color: #FFF;
+	z-index: 1;
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+.cl {
+	font-size: 0;
+	line-height: 0;
+	list-style-type: none;	
+}
+.dropDown_hover{
+	width: 100px;
+}
+.navbar-nav > ul > li {
+	color: #FFF;
+	line-height: 44px;
+	font-size: 14px;
+	display: inline-block;
+	text-align: center;
+	position: relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+.dropDown_A {
+	padding: 0 10px;
+	color: #FFF;
+	display: inline-block;
+	text-align: center;
+}
+.menu {
+	background-color: #FFF0F0;
+	border: solid 1px #c0392b;
+	transition:all .3s ease 0s;
+	border-radius: 4px;
+}
+.dropDown-menu {
+	display: none;
+	border-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	background-color: #FFF0F0;
+	border:solid 1px #c0392b;
+	transform: all .3s ease 0s;
+	box-shadow: 0 1px 2px rgba(192,57,43,0.1);
+	border-radius: 4px;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.dropDown-menu > li > a {
+	display: block;
+	border-bottom: solid 1px #F2F2F2;
+	padding: 5px 20px;
+	line-height: 1.8;
+	text-align: left;
+	font-weight: normal;
+	white-space: nowrap;
+	vertical-align: top;
+	color: #c0392b;
+	text-decoration: none;
+	cursor: pointer;
+}

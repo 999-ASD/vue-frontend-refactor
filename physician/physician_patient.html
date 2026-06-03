@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>患者查看 - 东软云医院HIS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="../css/bootstrap.css" rel="stylesheet">
+      <script src="../js/bootstrap.js"></script>
+    
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container-fluid">
+            <button id="menu-toggle" class="d-lg-none btn btn-link me-2 fs-3 text-white">☰</button>
+            <a href="../hospital.html" class="navbar-brand">东软云医院HIS</a>
+            <span class="navbar-text ms-2">v1.0</span>
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item me-2">超级管理员</li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        李思
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#">个人信息</a></li>
+                        <li><a class="dropdown-item" href="#">切换账户</a></li>
+                        <li><a class="dropdown-item" href="#">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 侧边菜单：大屏显示，移动端用offcanvas -->
+            <nav class="col-lg-2 d-none d-lg-block bg-light py-3" id="sidebarMenu">
+                <div class="accordion" id="menuAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                挂号收费
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#menuAccordion">
+                            <div class="accordion-body p-2">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link" href="../registration/onsite_registration.html" title="窗口挂号">窗口挂号</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../registration/registration_record.html" title="窗口退号">窗口退号</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                门诊医生
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#menuAccordion">
+                            <div class="accordion-body p-2">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link active" href="../physician/physician_patient.html" title="患者查看">患者查看</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../physician/home_medical_record.html" title="病历首页">医生诊疗:病历首页</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="../physician/write_prescription.html" title="开设处方">医生诊疗:开设处方</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                药房管理
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#menuAccordion">
+                            <div class="accordion-body p-2">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item"><a class="nav-link" href="../drugstore/give_medicine.html" title="药房发药">药房发药</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Offcanvas菜单：移动端显示 -->
+            <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasSidebarLabel">菜单</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body p-0">
+                    <div class="accordion" id="menuAccordionMobile">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOneMobile">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneMobile" aria-expanded="false" aria-controls="collapseOneMobile">
+                                    挂号收费
+                                </button>
+                            </h2>
+                            <div id="collapseOneMobile" class="accordion-collapse collapse" aria-labelledby="headingOneMobile" data-bs-parent="#menuAccordionMobile">
+                                <div class="accordion-body p-2">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link" href="../registration/onsite_registration.html" title="窗口挂号">窗口挂号</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="../registration/registration_record.html" title="窗口退号">窗口退号</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwoMobile">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoMobile" aria-expanded="false" aria-controls="collapseTwoMobile">
+                                    门诊医生
+                                </button>
+                            </h2>
+                            <div id="collapseTwoMobile" class="accordion-collapse collapse show" aria-labelledby="headingTwoMobile" data-bs-parent="#menuAccordionMobile">
+                                <div class="accordion-body p-2">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link active" href="../physician/physician_patient.html" title="患者查看">患者查看</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="../physician/home_medical_record.html" title="病历首页">医生诊疗:病历首页</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="../physician/write_prescription.html" title="开设处方">医生诊疗:开设处方</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThreeMobile">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeMobile" aria-expanded="false" aria-controls="collapseThreeMobile">
+                                    药房管理
+                                </button>
+                            </h2>
+                            <div id="collapseThreeMobile" class="accordion-collapse collapse" aria-labelledby="headingThreeMobile" data-bs-parent="#menuAccordionMobile">
+                                <div class="accordion-body p-2">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link" href="../drugstore/give_medicine.html" title="药房发药">药房发药</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 主内容区 -->
+            <main class="col-12 col-lg-10 px-md-4 py-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-between">
+                        <li class="breadcrumb-item">门诊医生</li>
+                        <li class="breadcrumb-item active" aria-current="page">患者查看</li>
+                    </ol>
+                </nav>
+                <div>
+                    <form class="row g-2 mb-3 bg-light rounded p-3">
+                        <div class="col-12 col-md-4">
+                            <input type="text" class="form-control" placeholder="输入病历号">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="text" class="form-control" placeholder="输入姓名">
+                        </div>
+                        <div class="col-12 col-md-4 d-grid d-md-flex align-items-center">
+                            <button class="btn btn-primary w-100 w-md-auto" type="submit">搜索</button>
+                        </div>
+                    </form>
+                    <div class="fw-bold mb-2">排队患者</div>
+                    <!-- 桌面端表格 -->
+                    <div class="table-responsive d-none d-md-block">
+                        <table class="table table-bordered align-middle mb-0 table-hover" style="min-width:600px;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>编号</th>
+                                    <th>患者病历号</th>
+                                    <th>患者姓名</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>1000014</td>
+                                    <td>张三有</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                        <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                        <button class="btn btn-primary btn-sm">叫号</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>1000015</td>
+                                    <td>李思华</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                        <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                        <button class="btn btn-primary btn-sm">叫号</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>1000016</td>
+                                    <td>王仆陆</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                        <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                        <button class="btn btn-primary btn-sm">叫号</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>1000017</td>
+                                    <td>马梦梅</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                        <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                        <button class="btn btn-primary btn-sm">叫号</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 移动端卡片式 -->
+                    <div class="d-block d-md-none">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">编号：1</h5>
+                                <p class="mb-1">患者病历号：1000014</p>
+                                <p class="mb-1">患者姓名：张三有</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                    <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                    <button class="btn btn-primary btn-sm">叫号</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">编号：2</h5>
+                                <p class="mb-1">患者病历号：1000015</p>
+                                <p class="mb-1">患者姓名：李思华</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                    <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                    <button class="btn btn-primary btn-sm">叫号</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">编号：3</h5>
+                                <p class="mb-1">患者病历号：1000016</p>
+                                <p class="mb-1">患者姓名：王仆陆</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                    <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                    <button class="btn btn-primary btn-sm">叫号</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">编号：4</h5>
+                                <p class="mb-1">患者病历号：1000017</p>
+                                <p class="mb-1">患者姓名：马梦梅</p>
+                                <div class="mt-2">
+                                    <button class="btn btn-primary btn-sm me-2">创建病历</button>
+                                    <button class="btn btn-danger btn-sm me-2">跳过</button>
+                                    <button class="btn btn-primary btn-sm">叫号</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+      // 让移动端菜单按钮能弹出 offcanvas 菜单
+      document.getElementById('menu-toggle').addEventListener('click', function () {
+        var offcanvas = new bootstrap.Offcanvas(document.getElementById('offcanvasSidebar'));
+        offcanvas.show();
+      });
+    </script>
+</body>
+</html> 

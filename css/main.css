@@ -1,0 +1,36 @@
+.section-main{
+	position: absolute;
+	display: block;
+	margin: 0;
+	padding: 0;
+	top: 44px;
+	right: 0;
+	bottom: 0;
+	left: 199px;
+	overflow: hidden;
+	z-index: 1;
+	background-color: #FFFFFF;
+}
+.breakcrumb{
+	background-color: #F5F5F5;
+	padding: 0 20px;
+	margin: 0;
+	position: relative;
+	z-index: 99;
+	border-bottom: 1px solid #E5E5E5;
+	line-height: 39px;
+	height: 39px;
+	overflow: hidden;
+	display: block;	
+}
+.view-main{
+	position: absolute;
+	padding: 20px;
+	top: 34px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+	z-index: 1;
+	display: block;
+}
