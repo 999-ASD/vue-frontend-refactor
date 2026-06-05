@@ -31,13 +31,13 @@
           @select="handleMenuSelect"
         >
           <el-menu-item index="/">
-            <component :is="icons.Home" />
+            <i class="el-icon-home"></i>
             <span>首页</span>
           </el-menu-item>
           
           <el-sub-menu index="registration">
             <template #title>
-              <component :is="icons.FileText" />
+              <i class="el-icon-document"></i>
               <span>挂号管理</span>
             </template>
             <el-menu-item index="/registration">窗口挂号</el-menu-item>
@@ -46,7 +46,7 @@
           
           <el-sub-menu index="patient">
             <template #title>
-              <component :is="icons.User" />
+              <i class="el-icon-user"></i>
               <span>患者管理</span>
             </template>
             <el-menu-item index="/patient-list">患者列表</el-menu-item>
@@ -54,17 +54,17 @@
           </el-sub-menu>
           
           <el-menu-item index="/medical-record">
-            <component :is="icons.File" />
+            <i class="el-icon-files"></i>
             <span>病历管理</span>
           </el-menu-item>
           
           <el-menu-item index="/prescription">
-            <component :is="icons.PenTool" />
+            <i class="el-icon-edit-pen"></i>
             <span>处方管理</span>
           </el-menu-item>
           
           <el-menu-item index="/drugstore">
-            <component :is="icons.Pill" />
+            <i class="el-icon-box"></i>
             <span>药房管理</span>
           </el-menu-item>
         </el-menu>
@@ -84,27 +84,11 @@ import { computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { ElMessage } from 'element-plus'
-import { 
-  House, 
-  Document, 
-  User, 
-  Files, 
-  EditPen, 
-  Box 
-} from '@element-plus/icons-vue'
+import { User } from '@element-plus/icons-vue'
 
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
-
-const icons = {
-  Home: House,
-  FileText: Document,
-  User,
-  File: Files,
-  PenTool: EditPen,
-  Pill: Box
-}
 
 const activeMenu = computed(() => route.path)
 
