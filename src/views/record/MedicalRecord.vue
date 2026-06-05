@@ -2,8 +2,8 @@
   <div class="medical-record">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>病历管理</el-breadcrumb-item>
-      <el-breadcrumb-item>病历首页</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/record-home">病历管理</a></el-breadcrumb-item>
+      <el-breadcrumb-item>病历记录</el-breadcrumb-item>
     </el-breadcrumb>
     
     <el-card title="患者信息">

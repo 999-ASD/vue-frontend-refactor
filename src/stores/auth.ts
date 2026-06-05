@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
         id: 1,
         username: 'admin',
         name: '李思',
-        role: '超级管理员',
+        role: 'admin',
         token: 'mock-jwt-token-' + Date.now()
       }
       localStorage.setItem('token', currentUser.value.token)

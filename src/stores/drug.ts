@@ -1,29 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-
-export interface Drug {
-  id: number
-  code: string
-  name: string
-  spec: string
-  unit: string
-  manufacturer: string
-  price: number
-  stock: number
-  minStock: number
-}
-
-export interface Prescription {
-  id: number
-  caseNo: string
-  patientName: string
-  department: string
-  doctorName: string
-  createTime: string
-  drugs: PrescriptionDrug[]
-  totalAmount: number
-  status: 'pending' | 'dispensed' | 'completed'
-}
+import type { Drug, Prescription } from '../api/drug'
 
 export interface PrescriptionDrug {
   drugId: number
@@ -51,28 +28,26 @@ export const useDrugStore = defineStore('drug', () => {
       id: 1,
       caseNo: '1000014',
       patientName: '张三有',
-      department: '呼吸内科',
       doctorName: '张三有',
-      createTime: '2024-01-15 10:30:00',
-      drugs: [
-        { drugId: 1, drugName: '冠心丹参滴丸', spec: '0.04g×180粒/盒', quantity: 2, unit: '盒', price: 12.92 },
-        { drugId: 3, drugName: '六味地黄丸', spec: '0.8g×10袋/盒', quantity: 1, unit: '盒', price: 15 }
+      items: [
+        { drugId: 1, drugName: '冠心丹参滴丸', dose: '每日2次', frequency: '早晚服用', quantity: 2, price: 12.92 },
+        { drugId: 3, drugName: '六味地黄丸', dose: '每日1次', frequency: '睡前服用', quantity: 1, price: 15 }
       ],
-      totalAmount: 40.84,
-      status: 'dispensed'
+      total: 40.84,
+      status: '已发药',
+      createTime: '2024-01-15 10:30:00'
     },
     {
       id: 2,
       caseNo: '1000015',
       patientName: '李思华',
-      department: '神经内科',
       doctorName: '李思华',
-      createTime: '2024-01-15 14:00:00',
-      drugs: [
-        { drugId: 2, drugName: '荞参益气滴丸', spec: '0.5g×15袋/盒', quantity: 3, unit: '盒', price: 7.83 }
+      items: [
+        { drugId: 2, drugName: '荞参益气滴丸', dose: '每日3次', frequency: '饭后服用', quantity: 3, price: 7.83 }
       ],
-      totalAmount: 23.49,
-      status: 'pending'
+      total: 23.49,
+      status: '待发药',
+      createTime: '2024-01-15 14:00:00'
     }
   ])
 
@@ -144,15 +119,29 @@ export const useDrugStore = defineStore('drug', () => {
 
   function dispensePrescription(id: number): boolean {
     const prescription = prescriptions.value.find(p => p.id === id)
-    if (!prescription || prescription.status !== 'pending') return false
+    if (!prescription || prescription.status !== '待发药') return false
 
-    for (const pd of prescription.drugs) {
+    for (const pd of prescription.items) {
       if (!reduceStock(pd.drugId, pd.quantity)) {
         return false
       }
     }
-    prescription.status = 'dispensed'
+    prescription.status = '已发药'
     return true
+  }
+
+  function updatePrescriptionStatus(id: number, status: '待发药' | '已发药'): void {
+    const prescription = prescriptions.value.find(p => p.id === id)
+    if (prescription) {
+      prescription.status = status
+    }
+  }
+
+  function deletePrescription(id: number): void {
+    const index = prescriptions.value.findIndex(p => p.id === id)
+    if (index > -1) {
+      prescriptions.value.splice(index, 1)
+    }
   }
 
   function getPrescriptionByCaseNo(caseNo: string): Prescription | undefined {
@@ -172,6 +161,8 @@ export const useDrugStore = defineStore('drug', () => {
     reduceStock,
     addPrescription,
     dispensePrescription,
+    updatePrescriptionStatus,
+    deletePrescription,
     getPrescriptionByCaseNo
   }
 })

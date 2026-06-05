@@ -1,17 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-
-export interface Patient {
-  id: number
-  caseNo: string
-  name: string
-  gender: string
-  age: number
-  idCard: string
-  address: string
-  phone: string
-  createTime: string
-}
+import type { Patient } from '../api/patient'
 
 export interface QueuePatient {
   id: number
@@ -22,19 +11,19 @@ export interface QueuePatient {
 
 export const usePatientStore = defineStore('patient', () => {
   const patients = ref<Patient[]>([
-    { id: 1, caseNo: '1000014', name: '张三有', gender: '男', age: 35, idCard: '222123200112120012', address: '北京市朝阳区', phone: '13800138001', createTime: '2024-01-10 10:30:00' },
-    { id: 2, caseNo: '1000015', name: '李思华', gender: '女', age: 42, idCard: '222123199005150023', address: '北京市海淀区', phone: '13800138002', createTime: '2024-01-11 14:20:00' },
-    { id: 3, caseNo: '1000016', name: '王仆陆', gender: '男', age: 28, idCard: '222123199508200014', address: '北京市西城区', phone: '13800138003', createTime: '2024-01-12 09:15:00' },
-    { id: 4, caseNo: '1000017', name: '马梦梅', gender: '女', age: 56, idCard: '222123196703100025', address: '北京市东城区', phone: '13800138004', createTime: '2024-01-13 11:45:00' },
-    { id: 5, caseNo: '1000018', name: '张新如', gender: '男', age: 45, idCard: '222123197812250016', address: '北京市丰台区', phone: '13800138005', createTime: '2024-01-14 15:00:00' },
-    { id: 6, caseNo: '1000019', name: '李欣玲', gender: '女', age: 32, idCard: '222123199106180027', address: '北京市石景山区', phone: '13800138006', createTime: '2024-01-15 10:00:00' }
+    { id: 1, caseNo: '1000014', name: '刘建国', gender: '男', age: 35, idCard: '222123200112120012', address: '北京市朝阳区', phone: '13800138001', createTime: '2024-01-10 10:30:00' },
+    { id: 2, caseNo: '1000015', name: '陈美玲', gender: '女', age: 42, idCard: '222123199005150023', address: '北京市海淀区', phone: '13800138002', createTime: '2024-01-11 14:20:00' },
+    { id: 3, caseNo: '1000016', name: '赵伟强', gender: '男', age: 28, idCard: '222123199508200014', address: '北京市西城区', phone: '13800138003', createTime: '2024-01-12 09:15:00' },
+    { id: 4, caseNo: '1000017', name: '孙晓燕', gender: '女', age: 56, idCard: '222123196703100025', address: '北京市东城区', phone: '13800138004', createTime: '2024-01-13 11:45:00' },
+    { id: 5, caseNo: '1000018', name: '周大伟', gender: '男', age: 45, idCard: '222123197812250016', address: '北京市丰台区', phone: '13800138005', createTime: '2024-01-14 15:00:00' },
+    { id: 6, caseNo: '1000019', name: '吴芳芳', gender: '女', age: 32, idCard: '222123199106180027', address: '北京市石景山区', phone: '13800138006', createTime: '2024-01-15 10:00:00' }
   ])
 
   const queuePatients = ref<QueuePatient[]>([
-    { id: 1, caseNo: '1000014', name: '张三有', status: 'waiting' },
-    { id: 2, caseNo: '1000015', name: '李思华', status: 'waiting' },
-    { id: 3, caseNo: '1000016', name: '王仆陆', status: 'waiting' },
-    { id: 4, caseNo: '1000017', name: '马梦梅', status: 'waiting' }
+    { id: 1, caseNo: '1000014', name: '刘建国', status: 'waiting' },
+    { id: 2, caseNo: '1000015', name: '陈美玲', status: 'waiting' },
+    { id: 3, caseNo: '1000016', name: '赵伟强', status: 'waiting' },
+    { id: 4, caseNo: '1000017', name: '孙晓燕', status: 'waiting' }
   ])
 
   const currentPatient = ref<Patient | null>(null)

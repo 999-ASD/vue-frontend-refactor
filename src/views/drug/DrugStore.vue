@@ -2,7 +2,7 @@
   <div class="drugstore">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>药房管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/drugstore">药房管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>药房管理</el-breadcrumb-item>
     </el-breadcrumb>
     
@@ -16,16 +16,16 @@
               <el-row :gutter="20">
                 <el-col :span="8"><span class="label">病历号：</span>{{ currentPrescription.caseNo }}</el-col>
                 <el-col :span="8"><span class="label">患者姓名：</span>{{ currentPrescription.patientName }}</el-col>
-                <el-col :span="8"><span class="label">就诊科室：</span>{{ currentPrescription.department }}</el-col>
+                <el-col :span="8"><span class="label">医生：</span>{{ currentPrescription.doctorName }}</el-col>
               </el-row>
             </el-card>
             
             <el-card title="药品明细" style="margin-top: 20px;">
-              <el-table :data="currentPrescription.drugs" border style="width: 100%;">
+              <el-table :data="currentPrescription.items" border style="width: 100%;">
                 <el-table-column prop="drugName" label="药品名称" width="150" />
-                <el-table-column prop="spec" label="规格" width="150" />
+                <el-table-column prop="dose" label="剂量" width="120" />
+                <el-table-column prop="frequency" label="频次" width="120" />
                 <el-table-column prop="quantity" label="数量" width="100" />
-                <el-table-column prop="unit" label="单位" width="80" />
                 <el-table-column prop="price" label="单价" width="100">
                   <template #default="scope">¥ {{ scope.row.price.toFixed(2) }}</template>
                 </el-table-column>
@@ -39,7 +39,7 @@
                 </el-table-column>
               </el-table>
               <div class="prescription-total">
-                <span>处方合计：¥ {{ currentPrescription.totalAmount.toFixed(2) }}</span>
+                <span>处方合计：¥ {{ currentPrescription.total.toFixed(2) }}</span>
               </div>
             </el-card>
             
@@ -101,7 +101,7 @@
 <script setup lang="ts">
 import { reactive, ref, computed } from 'vue'
 import { useDrugStore } from '../../stores/drug'
-import type { Drug } from '../../stores/drug'
+import type { Drug } from '../../api/drug'
 import SearchForm from '../../components/common/SearchForm.vue'
 import OperationDialog from '../../components/common/OperationDialog.vue'
 import { ElMessage } from 'element-plus'
@@ -111,21 +111,19 @@ const drugStore = useDrugStore()
 const activeTab = ref('dispense')
 
 const dispenseForm = reactive({
-  caseNo: '',
-  name: ''
+  caseNo: ''
 })
 
 const dispenseSearchFields = {
-  caseNo: { label: '病历号', type: 'input' as const, placeholder: '请输入病历号' },
-  name: { label: '姓名', type: 'input' as const, placeholder: '请输入姓名' }
+  caseNo: { label: '病历号', type: 'input' as const, placeholder: '请输入病历号' }
 }
 
 const currentPrescription = ref<{
   caseNo: string
   patientName: string
-  department: string
-  drugs: { drugName: string; spec: string; quantity: number; unit: string; price: number }[]
-  totalAmount: number
+  doctorName: string
+  items: { drugName: string; dose: string; frequency: string; quantity: number; price: number }[]
+  total: number
 } | null>(null)
 
 const inventorySearch = ref('')
@@ -166,27 +164,19 @@ function handleSearchPrescription(filters: Record<string, any>) {
     currentPrescription.value = {
       caseNo: prescription.caseNo,
       patientName: prescription.patientName,
-      department: prescription.department,
-      drugs: prescription.drugs.map(d => ({
+      doctorName: prescription.doctorName,
+      items: prescription.items.map(d => ({
         drugName: d.drugName,
-        spec: d.spec,
+        dose: d.dose,
+        frequency: d.frequency,
         quantity: d.quantity,
-        unit: d.unit,
         price: d.price
       })),
-      totalAmount: prescription.totalAmount
+      total: prescription.total
     }
   } else {
-    currentPrescription.value = {
-      caseNo: dispenseForm.caseNo,
-      patientName: dispenseForm.name || '张三',
-      department: '呼吸内科',
-      drugs: [
-        { drugName: '冠心丹参滴丸', spec: '0.04g×180粒/盒', quantity: 2, unit: '盒', price: 12.92 },
-        { drugName: '六味地黄丸', spec: '0.8g×10袋/盒', quantity: 1, unit: '盒', price: 15 }
-      ],
-      totalAmount: 40.84
-    }
+    ElMessage.warning('未找到该病历号对应的处方')
+    currentPrescription.value = null
   }
 }
 
@@ -202,13 +192,11 @@ function handleDispense() {
   ElMessage.success('发药成功！')
   currentPrescription.value = null
   dispenseForm.caseNo = ''
-  dispenseForm.name = ''
 }
 
 function handleReset() {
   currentPrescription.value = null
   dispenseForm.caseNo = ''
-  dispenseForm.name = ''
 }
 
 function handleSearchInventory(filters: Record<string, any>) {
@@ -242,12 +230,17 @@ function handleSaveDrug(data: Record<string, any>) {
   
   isEdit.value = false
   Object.assign(currentDrug, {})
+  showAddModal.value = false
 }
 </script>
 
 <style scoped>
 .drugstore {
   padding: 20px;
+}
+
+.el-breadcrumb {
+  margin-bottom: 32px;
 }
 
 .drug-tabs {

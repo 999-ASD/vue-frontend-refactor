@@ -1,10 +1,9 @@
 <template>
   <el-dialog
     :title="title"
-    :visible="visible"
+    v-model="dialogVisible"
     :width="width"
     :before-close="handleClose"
-    @update:visible="handleVisibleChange"
   >
     <slot name="body">
       <el-form :model="formData" :label-width="labelWidth" class="dialog-form">
@@ -62,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { reactive, computed, watch } from 'vue'
 
 interface FieldOption {
   label: string
@@ -97,21 +96,19 @@ const emit = defineEmits<{
 
 const formData = reactive<Record<string, any>>({})
 
-watch(() => props.initialData, (data) => {
-  if (data) {
-    Object.assign(formData, data)
-  }
-}, { immediate: true })
-
-watch(() => props.visible, (val) => {
-  if (val && props.initialData) {
-    Object.assign(formData, props.initialData)
-  }
+const dialogVisible = computed({
+  get: () => props.visible,
+  set: (val: boolean) => emit('update:visible', val)
 })
 
-function handleVisibleChange(val: boolean) {
-  emit('update:visible', val)
-}
+watch(() => props.visible, (val) => {
+  if (val) {
+    Object.keys(formData).forEach(key => delete formData[key])
+    if (props.initialData) {
+      Object.assign(formData, props.initialData)
+    }
+  }
+})
 
 function handleClose() {
   emit('update:visible', false)

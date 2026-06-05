@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <el-breadcrumb separator="/">
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
       <el-breadcrumb-item>数据统计</el-breadcrumb-item>
     </el-breadcrumb>
     
@@ -39,28 +39,6 @@
       </el-card>
     </div>
     
-    <div class="quick-actions">
-      <h3>快捷操作</h3>
-      <div class="action-buttons">
-        <el-button type="primary" @click="navigate('/registration')">
-          <span class="btn-icon">📝</span>
-          <span>快速挂号</span>
-        </el-button>
-        <el-button type="success" @click="navigate('/patient-list')">
-          <span class="btn-icon">👥</span>
-          <span>查看患者</span>
-        </el-button>
-        <el-button type="warning" @click="navigate('/prescription')">
-          <span class="btn-icon">💊</span>
-          <span>开具处方</span>
-        </el-button>
-        <el-button type="info" @click="navigate('/drugstore')">
-          <span class="btn-icon">🏪</span>
-          <span>药房发药</span>
-        </el-button>
-      </div>
-    </div>
-    
     <div class="recent-records">
       <el-card title="最近挂号记录">
         <el-table :data="recentRecords" border style="width: 100%;">
@@ -84,12 +62,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { usePatientStore } from '../stores/patient'
 import { useRegistrationStore } from '../stores/registration'
 import { useDrugStore } from '../stores/drug'
 
-const router = useRouter()
 const patientStore = usePatientStore()
 const registrationStore = useRegistrationStore()
 const drugStore = useDrugStore()
@@ -97,10 +73,6 @@ const drugStore = useDrugStore()
 const recentRecords = computed(() => 
   registrationStore.records.slice(0, 5)
 )
-
-function navigate(path: string) {
-  router.push(path)
-}
 
 function getStatusType(status: string): string {
   const statusMap: Record<string, string> = {
@@ -115,6 +87,10 @@ function getStatusType(status: string): string {
 <style scoped>
 .dashboard {
   padding: 20px;
+}
+
+.el-breadcrumb {
+  margin-bottom: 32px;
 }
 
 .stats-grid {
@@ -148,35 +124,6 @@ function getStatusType(status: string): string {
 .stat-label {
   font-size: 14px;
   color: #666;
-}
-
-.quick-actions {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-}
-
-.quick-actions h3 {
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.action-buttons button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-}
-
-.btn-icon {
-  font-size: 18px;
 }
 
 .recent-records {

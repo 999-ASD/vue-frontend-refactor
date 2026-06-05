@@ -2,7 +2,7 @@
   <div class="registration-record">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>挂号管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/registration-home">挂号管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>挂号记录</el-breadcrumb-item>
     </el-breadcrumb>
     
@@ -100,6 +100,10 @@ function handleCancel(id: number) {
 <style scoped>
 .registration-record {
   padding: 20px;
+}
+
+.el-breadcrumb {
+  margin-bottom: 32px;
 }
 
 .disabled-text {

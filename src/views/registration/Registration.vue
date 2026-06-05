@@ -2,7 +2,7 @@
   <div class="registration">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>挂号管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/registration-home">挂号管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>窗口挂号</el-breadcrumb-item>
     </el-breadcrumb>
     
@@ -224,8 +224,12 @@ function handleClear() {
   padding: 20px;
 }
 
+.el-breadcrumb {
+  margin-bottom: 32px;
+}
+
 .action-buttons {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .action-buttons button {

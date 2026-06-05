@@ -33,11 +33,14 @@
           </el-button>
         </el-form-item>
       </el-form>
-      
-      <div class="login-tips">
-        <span>用户名：admin</span>
-        <span>密码：123456</span>
-      </div>
+    </div>
+    
+    <div class="background-decoration">
+      <div class="circle circle-1"></div>
+      <div class="circle circle-2"></div>
+      <div class="circle circle-3"></div>
+      <div class="circle circle-4"></div>
+      <div class="circle circle-5"></div>
     </div>
   </div>
 </template>
@@ -82,15 +85,91 @@ function handleLogin() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 50%, #a71d2a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.background-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  animation: float 8s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.3);
+  top: -100px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.4);
+  top: 20%;
+  right: -50px;
+  animation-delay: 2s;
+}
+
+.circle-3 {
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.25);
+  bottom: 10%;
+  left: 10%;
+  animation-delay: 4s;
+}
+
+.circle-4 {
+  width: 180px;
+  height: 180px;
+  background: rgba(255, 255, 255, 0.35);
+  bottom: -50px;
+  right: 20%;
+  animation-delay: 1s;
+}
+
+.circle-5 {
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
 }
 
 .login-box {
   width: 400px;
-  background: white;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
   padding: 40px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
 .login-header {
@@ -99,9 +178,10 @@ function handleLogin() {
 }
 
 .login-header h1 {
-  font-size: 24px;
+  font-size: 26px;
   color: #dc3545;
   margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .login-header p {
@@ -110,7 +190,7 @@ function handleLogin() {
 }
 
 .login-form {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .login-btn {
@@ -121,15 +201,6 @@ function handleLogin() {
   align-items: center;
   justify-content: center;
   gap: 8px;
-}
-
-.login-tips {
-  text-align: center;
-  font-size: 12px;
-  color: #999;
-}
-
-.login-tips span {
-  margin: 0 10px;
+  border-radius: 8px;
 }
 </style>

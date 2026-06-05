@@ -2,7 +2,7 @@
   <div class="patient-list">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>患者管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/patient-home">患者管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>患者列表</el-breadcrumb-item>
     </el-breadcrumb>
     
@@ -45,7 +45,7 @@
 import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePatientStore } from '../../stores/patient'
-import type { Patient } from '../../stores/patient'
+import type { Patient } from '../../api/patient'
 import SearchForm from '../../components/common/SearchForm.vue'
 import OperationDialog from '../../components/common/OperationDialog.vue'
 import { ElMessage } from 'element-plus'
@@ -123,6 +123,7 @@ function handleSave(data: Record<string, any>) {
   
   isEdit.value = false
   Object.assign(currentPatient, {})
+  showAddModal.value = false
 }
 </script>
 
@@ -131,7 +132,11 @@ function handleSave(data: Record<string, any>) {
   padding: 20px;
 }
 
+.el-breadcrumb {
+  margin-bottom: 32px;
+}
+
 .action-buttons {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 </style>

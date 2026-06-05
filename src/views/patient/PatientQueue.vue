@@ -2,7 +2,7 @@
   <div class="patient-queue">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>患者管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/patient-home">患者管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>排队叫号</el-breadcrumb-item>
     </el-breadcrumb>
     

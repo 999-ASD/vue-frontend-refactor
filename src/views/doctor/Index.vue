@@ -2,7 +2,7 @@
   <div class="doctor-list">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>医生管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/doctor">医生管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>医生列表</el-breadcrumb-item>
     </el-breadcrumb>
     
@@ -142,13 +142,14 @@ function handleSave(data: Record<string, any>): void {
     ElMessage.success('添加成功！')
   }
   
-  showAddModal.value = false
-  Object.assign(currentDoctor, {})
   isEdit.value = false
+  Object.assign(currentDoctor, {})
+  showAddModal.value = false
 }
 </script>
 
 <style scoped>
 .doctor-list { padding: 20px; }
-.action-buttons { margin-bottom: 20px; }
+.el-breadcrumb { margin-bottom: 32px; }
+.action-buttons { margin-bottom: 24px; }
 </style>

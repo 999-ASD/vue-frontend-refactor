@@ -2,7 +2,7 @@
   <div class="prescription">
     <el-breadcrumb separator="/">
       <el-breadcrumb-item><a href="/dashboard">首页</a></el-breadcrumb-item>
-      <el-breadcrumb-item>病历管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/record-home">病历管理</a></el-breadcrumb-item>
       <el-breadcrumb-item>开设处方</el-breadcrumb-item>
     </el-breadcrumb>
     
@@ -109,10 +109,10 @@
 import { reactive, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDrugStore } from '../../stores/drug'
-import type { Drug } from '../../stores/drug'
+import type { Drug } from '../../api/drug'
 import { useRegistrationStore } from '../../stores/registration'
 import SearchForm from '../../components/common/SearchForm.vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 const router = useRouter()
 const drugStore = useDrugStore()
@@ -168,7 +168,7 @@ function handleRemoveDrug(index: number) {
   form.drugs.splice(index, 1)
 }
 
-function handleSave() {
+async function handleSave() {
   if (!form.caseNo) {
     ElMessage.warning('请输入病历号')
     return
@@ -185,22 +185,39 @@ function handleSave() {
   drugStore.addPrescription({
     caseNo: form.caseNo,
     patientName: form.name,
-    department: form.department,
     doctorName: '张三有',
     createTime: new Date().toLocaleString('zh-CN'),
-    drugs: form.drugs.map(d => ({
+    items: form.drugs.map(d => ({
       drugId: 0,
       drugName: d.name,
-      spec: d.spec,
+      dose: '每日3次',
+      frequency: '饭后服用',
       quantity: d.quantity,
-      unit: d.unit,
       price: d.price
     })),
-    totalAmount: totalAmount.value,
-    status: 'pending'
+    total: totalAmount.value,
+    status: '待发药'
   })
   
-  ElMessage.success('处方保存成功！')
+  ElMessage.success('处方保存成功！已存入处方数据库')
+  
+  try {
+    await ElMessageBox.confirm(
+      '处方已保存成功！是否跳转到处方记录页面查看？',
+      '提示',
+      {
+        confirmButtonText: '跳转',
+        cancelButtonText: '继续开具',
+        type: 'success'
+      }
+    )
+    router.push('/prescription-list')
+  } catch {
+    form.caseNo = ''
+    form.name = ''
+    form.department = ''
+    form.drugs = []
+  }
 }
 
 function handlePrint() {
@@ -223,6 +240,10 @@ function handleBack() {
 <style scoped>
 .prescription {
   padding: 20px;
+}
+
+.el-breadcrumb {
+  margin-bottom: 32px;
 }
 
 .prescription-footer {
