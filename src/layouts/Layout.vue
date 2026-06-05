@@ -53,6 +53,11 @@
             <el-menu-item index="/patient-queue">排队叫号</el-menu-item>
           </el-sub-menu>
           
+          <el-menu-item index="/doctor">
+            <i class="el-icon-user-solid"></i>
+            <span>医生管理</span>
+          </el-menu-item>
+          
           <el-menu-item index="/medical-record">
             <i class="el-icon-files"></i>
             <span>病历管理</span>

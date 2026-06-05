@@ -15,6 +15,7 @@ const routes: RouteRecordRaw[] = [
       { path: '/registration-record', name: 'RegistrationRecord', component: () => import('../views/registration/RegistrationRecord.vue') },
       { path: '/patient-list', name: 'PatientList', component: () => import('../views/patient/PatientList.vue') },
       { path: '/patient-queue', name: 'PatientQueue', component: () => import('../views/patient/PatientQueue.vue') },
+      { path: '/doctor', name: 'Doctor', component: () => import('../views/doctor/Index.vue') },
       { path: '/medical-record/:id?', name: 'MedicalRecord', component: () => import('../views/record/MedicalRecord.vue') },
       { path: '/prescription', name: 'Prescription', component: () => import('../views/record/Prescription.vue') },
       { path: '/drugstore', name: 'DrugStore', component: () => import('../views/drug/DrugStore.vue') }
