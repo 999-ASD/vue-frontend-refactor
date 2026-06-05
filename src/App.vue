@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <Layout>
-      <router-view></router-view>
-    </Layout>
-  </div>
+  <Layout>
+    <router-view />
+  </Layout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Layout from './components/Layout.vue'
 </script>
 

@@ -13,7 +13,7 @@
             <el-dropdown-menu>
               <el-dropdown-item>个人信息</el-dropdown-item>
               <el-dropdown-item>切换账户</el-dropdown-item>
-              <el-dropdown-item divided>退出</el-dropdown-item>
+              <el-dropdown-item divided @click="handleLogout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -22,20 +22,74 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useHospitalStore } from '../stores/hospital'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+
 const store = useHospitalStore()
+const router = useRouter()
+
+function handleLogout() {
+  sessionStorage.removeItem('isLoggedIn')
+  ElMessage.info('已退出登录')
+  router.push('/login')
+}
 </script>
 
 <style scoped>
-.header { background-color: #dc3545; color: white; padding: 0 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.header-content { display: flex; justify-content: space-between; align-items: center; height: 60px; }
-.header-left { display: flex; align-items: center; gap: 12px; }
-.logo { font-size: 18px; font-weight: bold; }
-.version { font-size: 14px; opacity: 0.8; }
-.header-right { display: flex; align-items: center; gap: 20px; }
-.role { font-size: 14px; }
-.user-dropdown { cursor: pointer; }
-.user-name { font-size: 14px; padding: 8px 12px; border-radius: 4px; transition: background-color 0.2s; }
-.user-name:hover { background-color: rgba(255,255,255,0.2); }
+.header {
+  background-color: #dc3545;
+  color: white;
+  padding: 0 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.version {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.role {
+  font-size: 14px;
+}
+
+.user-dropdown {
+  cursor: pointer;
+}
+
+.user-name {
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.user-name:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 </style>

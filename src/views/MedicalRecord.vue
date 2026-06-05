@@ -34,19 +34,29 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, onMounted } from 'vue'
 import { useHospitalStore } from '../stores/hospital'
+import type { MedicalRecord } from '../stores/hospital'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 
 const store = useHospitalStore()
 const router = useRouter()
 
-const record = reactive({
-  caseNo: '', name: '', gender: '', age: '',
-  chiefComplaint: '', presentHistory: '', pastHistory: '',
-  physicalExam: '', diagnosis: '', treatmentPlan: ''
+const record = reactive<MedicalRecord>({
+  recordId: '',
+  caseNo: '',
+  name: '',
+  gender: '',
+  age: 0,
+  createTime: '',
+  chiefComplaint: '',
+  presentHistory: '',
+  pastHistory: '',
+  physicalExam: '',
+  diagnosis: '',
+  treatmentPlan: ''
 })
 
 onMounted(() => {
@@ -58,14 +68,16 @@ onMounted(() => {
   }
 })
 
-function handleSave() { 
-  ElMessage.success('病历保存成功！') 
+function handleSave(): void {
+  ElMessage.success('病历保存成功！')
 }
-function handleWritePrescription() { 
-  router.push('/prescription') 
+
+function handleWritePrescription(): void {
+  router.push('/prescription')
 }
-function handleBack() { 
-  router.push('/patient-list') 
+
+function handleBack(): void {
+  router.push('/patient-list')
 }
 </script>
 

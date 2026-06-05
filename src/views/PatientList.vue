@@ -32,23 +32,24 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue'
+<script setup lang="ts">
+import { reactive, computed } from 'vue'
 import { useHospitalStore } from '../stores/hospital'
+import type { QueuePatient } from '../stores/hospital'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 
 const store = useHospitalStore()
 const router = useRouter()
-const searchForm = ref({ caseNo: '', name: '' })
+const searchForm = reactive({ caseNo: '', name: '' })
 
-const filteredPatients = computed(() => store.queuePatients.filter(patient => {
-  const matchCaseNo = !searchForm.value.caseNo || patient.caseNo.includes(searchForm.value.caseNo)
-  const matchName = !searchForm.value.name || patient.name.includes(searchForm.value.name)
+const filteredPatients = computed<QueuePatient[]>(() => store.queuePatients.filter(patient => {
+  const matchCaseNo = !searchForm.caseNo || patient.caseNo.includes(searchForm.caseNo)
+  const matchName = !searchForm.name || patient.name.includes(searchForm.name)
   return matchCaseNo && matchName
 }))
 
-function getStatusTagType(status) {
+function getStatusTagType(status: string): string {
   switch(status) {
     case 'waiting': return 'info'
     case 'calling': return 'warning'
@@ -58,7 +59,7 @@ function getStatusTagType(status) {
   }
 }
 
-function getStatusText(status) {
+function getStatusText(status: string): string {
   switch(status) {
     case 'waiting': return '等待中'
     case 'calling': return '叫号中'
@@ -68,19 +69,22 @@ function getStatusText(status) {
   }
 }
 
-function handleSearch() {}
+function handleSearch(): void {}
 
-function handleCreateRecord(patient) {
-  store.setCurrentPatient(patient)
+function handleCreateRecord(patient: QueuePatient): void {
+  const fullPatient = store.patients.find(p => p.caseNo === patient.caseNo)
+  if (fullPatient) {
+    store.setCurrentPatient(fullPatient)
+  }
   router.push('/medical-record')
 }
 
-function handleSkip(id) {
+function handleSkip(id: number): void {
   store.skipPatient(id)
   ElMessage.info('已跳过该患者')
 }
 
-function handleCall(id) {
+function handleCall(id: number): void {
   store.callPatient(id)
   ElMessage.success('正在叫号...')
 }

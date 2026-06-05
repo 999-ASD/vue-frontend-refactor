@@ -41,30 +41,31 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, computed, onMounted } from 'vue'
 import { useHospitalStore } from '../stores/hospital'
+import type { Doctor } from '../stores/hospital'
 import { ElMessage } from 'element-plus'
 
 const store = useHospitalStore()
 
 const form = reactive({
-  caseNo: '', name: '', gender: '男', age: '', birth: '', idCard: '', address: '',
+  caseNo: '', name: '', gender: '男', age: 0, birth: '', idCard: '', address: '',
   payType: '自费', visitDate: '', noon: '上午', dept: '呼吸内科', noType: '主治医生',
-  doctor: '', caseBook: '是', fee: '', payMethod: '现金'
+  doctor: '', caseBook: '是', fee: 0, payMethod: '现金'
 })
 
-const availableDoctors = computed(() => store.filteredDoctors(form.dept))
+const availableDoctors = computed<Doctor[]>(() => store.filteredDoctors(form.dept))
 
 onMounted(() => {
   form.doctor = availableDoctors.value[0]?.name || ''
 })
 
-function handleDeptChange() { 
-  form.doctor = availableDoctors.value[0]?.name || '' 
+function handleDeptChange(): void {
+  form.doctor = availableDoctors.value[0]?.name || ''
 }
 
-function handleRegister() {
+function handleRegister(): void {
   if (!form.caseNo) {
     ElMessage.warning('请填写病历号')
     return
@@ -86,11 +87,11 @@ function handleRegister() {
   handleClear()
 }
 
-function handleClear() {
+function handleClear(): void {
   form.caseNo = ''
   form.name = ''
   form.gender = '男'
-  form.age = ''
+  form.age = 0
   form.birth = ''
   form.idCard = ''
   form.address = ''
@@ -101,7 +102,7 @@ function handleClear() {
   form.noType = '主治医生'
   form.doctor = availableDoctors.value[0]?.name || ''
   form.caseBook = '是'
-  form.fee = ''
+  form.fee = 0
   form.payMethod = '现金'
 }
 </script>

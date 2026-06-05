@@ -22,7 +22,7 @@
       <el-table-column prop="noon" label="午别"></el-table-column>
       <el-table-column prop="fee" label="费用"></el-table-column>
       <el-table-column prop="payMethod" label="付款方式"></el-table-column>
-      <el-table-column prop="status" label="status">
+      <el-table-column prop="status" label="状态">
         <template #default="scope"><el-tag :type="getStatusTagType(scope.row.status)">{{ scope.row.status }}</el-tag></template>
       </el-table-column>
       <el-table-column label="操作">
@@ -35,21 +35,22 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue'
+<script setup lang="ts">
+import { reactive, computed } from 'vue'
 import { useHospitalStore } from '../stores/hospital'
+import type { RegistrationRecord } from '../stores/hospital'
 import { ElMessage } from 'element-plus'
 
 const store = useHospitalStore()
-const searchForm = ref({ caseNo: '', name: '' })
+const searchForm = reactive({ caseNo: '', name: '' })
 
-const filteredRecords = computed(() => store.registrationRecords.filter(record => {
-  const matchCaseNo = !searchForm.value.caseNo || record.caseNo.includes(searchForm.value.caseNo)
-  const matchName = !searchForm.value.name || record.name.includes(searchForm.value.name)
+const filteredRecords = computed<RegistrationRecord[]>(() => store.registrationRecords.filter(record => {
+  const matchCaseNo = !searchForm.caseNo || record.caseNo.includes(searchForm.caseNo)
+  const matchName = !searchForm.name || record.name.includes(searchForm.name)
   return matchCaseNo && matchName
 }))
 
-function getStatusTagType(status) {
+function getStatusTagType(status: string): string {
   switch(status) {
     case '待就诊': return 'warning'
     case '已就诊': return 'success'
@@ -58,9 +59,9 @@ function getStatusTagType(status) {
   }
 }
 
-function handleSearch() {}
+function handleSearch(): void {}
 
-function handleCancel(id) {
+function handleCancel(id: number): void {
   store.cancelRegistration(id)
   ElMessage.success('退号成功！')
 }
