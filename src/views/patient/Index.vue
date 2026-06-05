@@ -53,7 +53,7 @@ import { usePatientStore } from '../../stores/patient'
 
 const patientStore = usePatientStore()
 
-const recentPatients = computed(() => patientStore.patients.slice(0, 5))
+const recentPatients = computed(() => patientStore.patients)
 
 const todayAdded = computed(() => {
   const today = new Date().toDateString()

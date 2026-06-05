@@ -49,11 +49,11 @@ export const useRegistrationStore = defineStore('registration', () => {
   ])
 
   const records = ref<RegistrationRecord[]>([
-    { id: 1, caseNo: '1000014', name: '张三有', department: '呼吸内科', doctor: '张三有', visitDate: '2024-01-15', noon: '上午', fee: 50, payMethod: '现金', status: '已就诊', createTime: '2024-01-15 08:30:00' },
-    { id: 2, caseNo: '1000015', name: '李思华', department: '神经内科', doctor: '李思华', visitDate: '2024-01-15', noon: '下午', fee: 60, payMethod: '微信', status: '已就诊', createTime: '2024-01-15 14:00:00' },
-    { id: 3, caseNo: '1000016', name: '王仆陆', department: '普外科', doctor: '王仆陆', visitDate: '2024-01-16', noon: '上午', fee: 50, payMethod: '支付宝', status: '待就诊', createTime: '2024-01-16 09:00:00' },
-    { id: 4, caseNo: '1000017', name: '马梦梅', department: '儿科', doctor: '马梦梅', visitDate: '2024-01-16', noon: '下午', fee: 40, payMethod: '医保卡', status: '待就诊', createTime: '2024-01-16 15:30:00' },
-    { id: 5, caseNo: '1000018', name: '张新如', department: '骨科', doctor: '张新如', visitDate: '2024-01-17', noon: '上午', fee: 60, payMethod: '现金', status: '待就诊', createTime: '2024-01-17 08:45:00' }
+    { id: 1, caseNo: '1000014', name: '刘建国', department: '呼吸内科', doctor: '张三有', visitDate: '2024-01-15', noon: '上午', fee: 50, payMethod: '现金', status: '已就诊', createTime: '2024-01-15 08:30:00' },
+    { id: 2, caseNo: '1000015', name: '陈美玲', department: '神经内科', doctor: '李思华', visitDate: '2024-01-15', noon: '下午', fee: 60, payMethod: '微信', status: '已就诊', createTime: '2024-01-15 14:00:00' },
+    { id: 3, caseNo: '1000016', name: '赵伟强', department: '普外科', doctor: '王仆陆', visitDate: '2024-01-16', noon: '上午', fee: 50, payMethod: '支付宝', status: '待就诊', createTime: '2024-01-16 09:00:00' },
+    { id: 4, caseNo: '1000017', name: '孙晓燕', department: '儿科', doctor: '马梦梅', visitDate: '2024-01-16', noon: '下午', fee: 40, payMethod: '医保卡', status: '待就诊', createTime: '2024-01-16 15:30:00' },
+    { id: 5, caseNo: '1000018', name: '周大伟', department: '骨科', doctor: '张新如', visitDate: '2024-01-17', noon: '上午', fee: 60, payMethod: '现金', status: '待就诊', createTime: '2024-01-17 08:45:00' }
   ])
 
   const filteredDoctors = computed(() => (dept: string) => {

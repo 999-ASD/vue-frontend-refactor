@@ -58,7 +58,7 @@ import { useRegistrationStore } from '../../stores/registration'
 
 const registrationStore = useRegistrationStore()
 
-const recentRecords = computed(() => registrationStore.records.slice(0, 5))
+const recentRecords = computed(() => registrationStore.records)
 
 const pendingCount = computed(() => 
   registrationStore.records.filter(r => r.status === '待就诊').length

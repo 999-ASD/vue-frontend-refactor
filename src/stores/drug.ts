@@ -27,7 +27,7 @@ export const useDrugStore = defineStore('drug', () => {
     {
       id: 1,
       caseNo: '1000014',
-      patientName: '张三有',
+      patientName: '刘建国',
       doctorName: '张三有',
       items: [
         { drugId: 1, drugName: '冠心丹参滴丸', dose: '每日2次', frequency: '早晚服用', quantity: 2, price: 12.92 },
@@ -40,7 +40,7 @@ export const useDrugStore = defineStore('drug', () => {
     {
       id: 2,
       caseNo: '1000015',
-      patientName: '李思华',
+      patientName: '陈美玲',
       doctorName: '李思华',
       items: [
         { drugId: 2, drugName: '荞参益气滴丸', dose: '每日3次', frequency: '饭后服用', quantity: 3, price: 7.83 }

@@ -74,8 +74,11 @@ export const usePatientStore = defineStore('patient', () => {
   function addToQueue(patient: Patient): void {
     const exists = queuePatients.value.find(p => p.caseNo === patient.caseNo)
     if (!exists) {
+      const maxId = queuePatients.value.length > 0 
+        ? Math.max(...queuePatients.value.map(p => p.id)) 
+        : 0
       queuePatients.value.push({
-        id: patient.id,
+        id: maxId + 1,
         caseNo: patient.caseNo,
         name: patient.name,
         status: 'waiting'
